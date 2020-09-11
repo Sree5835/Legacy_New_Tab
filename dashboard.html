@@ -1,0 +1,474 @@
+<!doctype HTML>
+<html class="js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Legacy New Tab</title>
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="css/theme.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body id="background">
+  <div id="preloader"></div>
+
+  <div id="main-container" class="container">
+    <div class="row">
+      <div class="col-md-12" id="welcome-box">
+        <div class="time-wrapper">
+          <br>
+          <div class="content">
+            <h1 id="date" class="date"></h1>
+            <h2 id="time-12" class="time"></h2>
+            <h2 id="time-24" class="time"></h2>
+          </div>
+        </div>
+
+        <!--notification popup box-->
+        <div class="box">
+        </div>
+        <!--notification popup box ends-->
+
+        <div class="widget-container">
+          <div class="top-left">
+            <h1 class="city" id="city">Weather</h1>
+
+            <h2 id="day">Day</h2>
+            <div class="other-details-key">
+              <p style="color: #eee;">Sunrise Time:</p>
+              <p style="color: #eee;">Sunset Time:</p>
+            </div>
+            <div class="other-details-values">
+              <p class="sunrise-time" style="color: #eee;">0:00 am</p>
+              <p class="sunset-time" style="color: #eee;">0:00 pm</p>
+            </div>
+          </div>
+          <div class="top-middle">
+            <h1 id="temperature">0</h1>
+            <h1 id="celsius">&deg;C</h1>
+            <!--<h2 id="temp-divider">/</h2>-->
+            <h1 id="fahrenheit">&deg;F</h1>
+          </div>
+          <div class="top-right">
+            <h1 id="weather-status">Weather</h1>
+            <img class="weather-icon" src="/img/weather/sunny2.png" alt="weather icon" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="search-bar" class="searchBox">
+      <form class="searchBar" method="get" action="http://www.google.com/search">
+        <input type="text" name="q" class="searchBarInput" id="searchBarInput" autocomplete="off" onfocus="if(this.value==this.defaultValue)this.value=''; this.style.color='black';" onblur="if(this.value=='')this.value=this.defaultValue; "
+          placeholder="What are you looking for?" />
+        <a href="javascript:void(0);" class="search-button">
+          <div class="icon">
+            <span class="clear">x</span>
+          </div>
+        </a>
+      </form>
+    </div>
+
+    <!-- reminder toggle -->
+    <!-- <div id="reminder-circle" class="btn btn-raised">
+    <div id="reminder-overlay"></div>
+    <i id="reminder-circle" class="material-icons-big">done_all</i>
+  </div> -->
+    <i id="reminder-circle" class="material-icons big add">done_all</i>
+
+    <div class="reminder-box">
+      <div class="reminder-box-header">
+        To-Do List
+        <span class="reminder-box-toggle"><i class="material-icons">close</i></span>
+      </div>
+      <div class="reminder-box-body">
+        <div class="reminder-box-overlay">
+        </div>
+        <div class="reminder-logs">
+          <h3 align="center">List</h3>
+          <ul id="todo-list"></ul>
+        </div>
+        <!--reminder-log -->
+      </div>
+      <div class="reminder-input">
+        <form id="todo-form" action="#">
+          <input type="text" name="item" id="todo-input" placeholder="Add a new reminder..." autocomplete="off" />
+        </form>
+      </div>
+    </div>
+
+    <!--Settings Modal-->
+    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <label type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></label>
+            <h4 class="modal-title" id="settingsModalLabel" align="center">Settings</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel-body">
+              <!--settings menu starts-->
+              <div class="col-sm-3">
+                <div class="sidebar-nav">
+                  <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <span class="visible-xs navbar-brand">Sidebar menu</span>
+                    </div>
+                    <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                      <ul class="nav navbar-nav">
+                        <li id="general-button" class="sidebar_button"><a>General</a></li>
+                        <li id="background-button" class="sidebar_button"><a>Background</a></li>
+                        <li id="challenges-button" class="sidebar_button"><a>Challenge</a></li>
+                        <li id="contributors-button" class="sidebar_button"><a>Contributors <span class="badge">14</span></a></li>
+                        <li id="idea-box-button" class="sidebar_button"><a>Idea Box</a></li>
+                        <li id="donate-button" class="sidebar_button"><a>Donate</a></li>
+                        <li id="contact-us-button" class="sidebar_button"><a>Contact Us</a></li>
+                        <li id="about-us-button" class="sidebar_button"><a>About Us</a></li>
+                      </ul>
+                    </div>
+                    <!--/.nav-collapse               <p align="center"><span class="badge">We are not responsible for the image.</span></p>-->
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-9" id="general-settings">
+                <h1 align="center">General</h1>
+                <hr>
+                <div class="row">
+                  <h3 align="center">Preferences</h3>
+                  <div class="col-sm-6">
+                    <h5>Temperature Type:</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <button id="temperature-toggle" type="button" class="btn btn-lg btn-secondary btn-toggle temperature-toggle active" data-toggle="button" aria-pressed="true">
+                      <div class="handle"></div>
+                    </button>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="col-sm-4">
+                    <h5>Time Format:</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <button id="time-toggle" type="button" class="btn btn-lg btn-secondary btn-toggle time-toggle" data-toggle="button" aria-pressed="true">
+                      <div class="handle"></div>
+                    </button>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="col-sm-4" style="width:37%;">
+                    <h5>View Searchbar:</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <button id="hide-searchbar-toggle" type="button" class="btn btn-lg btn-secondary btn-toggle view-search-bar" data-toggle="button" aria-pressed="true">
+                      <div class="handle"></div>
+                    </button>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <h3 align="center">User Info</h3>
+                  <form id="user-form" action="#">
+                    <input type="text" name="item" id="username-input" class="user-info-input" placeholder="Name..." autocomplete="off" /></form>
+                  <p align='center'><span class="badge">In order to change your name, please type your name and press enter</span></p>
+                </div>
+              </div>
+              <div class="col-sm-9" id="background-settings">
+                <h1 align="center">Background</h1>
+                <hr>
+                <div class="row">
+                  <h3 align="center">Appearance</h3>
+                  <div class="col-sm-4" style="width:49%;">
+                    <h5>View Background Image:</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <button id="view-image-toggle" type="button" class="btn btn-lg btn-secondary btn-toggle view-bg" data-toggle="button" aria-pressed="true">
+                      <div class="handle"></div>
+                    </button>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="col-sm-4" style="width:45%;">
+                    <h5>Contrast Info Bar:</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <button id="contrast-info-bar-toggle" type="button" class="btn btn-lg btn-secondary btn-toggle contrast-info-bar" data-toggle="button" aria-pressed="true">
+                      <div class="handle"></div>
+                    </button>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="col-sm-4" style="width:57%;">
+                    <h5>Keep This Background Image:</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <button id="keep-image-toggle" type="button" class="btn btn-lg btn-secondary btn-toggle keep-bg" data-toggle="button" aria-pressed="true">
+                      <div class="handle"></div>
+                    </button>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="col-sm-4" style="width:45%;">
+                    <h5>New Background In:</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <input type="number" class="bgDelay" name="bgDelay" min="1" max="60"/> Minute(s)
+                  </div>
+                  <br>
+                  <br>
+                  <div>
+                    <button id="changeBG" type="button" class="btn btn-warning">Change Background Image</button>
+                  </div>
+                  <br>
+                  <div id="test">
+                    <span class="btn btn-default btn-file">
+                      Upload an image...
+                      <br>
+                      (Recommended image size: 1600x900)
+                      <input type='file' />
+                    </span>
+                  </div>
+                </div>
+                <!-- <div class="row">
+                <h3 align="center">Background Image Type</h3>
+                <form id="bg-form" action="#">
+                  <input type="text" name="item" id="bg-input" class="user-info-input" placeholder="Type of background..." autocomplete="off" />
+                </form>
+                <p align='center'><span class="badge">In order to change your name, please type your name and press enter</span></p>
+              </div> -->
+              </div>
+              <div class="col-sm-9" id="challenges-settings" align="center">
+                <h1>Challenge</h1>
+                <hr>
+                <div class="row">
+                  <h4>None!</h4>
+                  <div class="col-sm-12">
+                    <h5>As of now, we aren't running a challenge. It's ok though! Just come back and check later.</h5>
+                    <h6>(psst - signup for our newsletter for new updates and interesting news!)</h6>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-light"><a href="https://mailchi.mp/e8f5997a5283/lnt-newsletter-sign-up">Sign up for the newsletter here!</a></button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h5>Surprise coming soon!</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-9" id="contributors-settings">
+                <h1 align="center">Contributors</h1>
+                <hr>
+                <div class="row">
+                  <h4 align="center">Here are all the contributors to this project.</h4>
+                  <div class="col-sm-12">
+                    <h5 align="center">It can even be you! Just submit an idea in the Idea Box or donate!</h5>
+                  </div>
+                </div>
+                <div class="row" align="center">
+                  <div class="col-sm-4">
+                    <h6>Sree S.</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Tudor Soncodi</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Kush Prasad</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Srijan Bijjam</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Nathan Pruyne</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Deep Patel</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Dylan Wrona</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Brahmani S.</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Lauren Landgraf</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Daniel Mokhad</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Rishi R.</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6>Jashwin R.</h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6><a href="https://www.youtube.com/channel/UCxMTzG7KvwJ-h5fQ3Ph-NKQ">Technical Chief</a></h6>
+                  </div>
+                  <div class="col-sm-4">
+                    <h6><a href="https://www.youtube.com/channel/UCYWC4X801lvk1ThyGsKOOdA">iSpecss</a></h6>
+                  </div>
+                </div>
+                <br>
+                <div class="col-sm-4" style="width:35%">
+                  <h5>Weather Data:</h5>
+                </div>
+                <div class="col-sm-5">
+                  <a href="https://www.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/purple.png" width="134" height="29" /> </a>
+                </div>
+              </div>
+              <div class="col-sm-9" id="idea-box-settings" align="center">
+                <h1>Idea Box</h1>
+                <hr>
+                <div class="row">
+                  <h4>Welcome to the Idea Box!</h4>
+                  <div class="col-sm-12">
+                    <h5>Here we share ideas so that they can be added to this extension. Click the link below to fill the form and possibly become a contributor!</h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <button type="button" class="btn btn-light"><a href="https://goo.gl/forms/hIDqzzz5K1XJIyi03">Go to Idea Box!</a></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-9" id="donate-settings" align="center">
+                <h1 align="center">Donate</h1>
+                <hr>
+                <div class="row">
+                  <h4>We need your help!</h4>
+                  <div class="col-sm-12">
+                    <h5>Although we provide free services, doing so costs us a lot. Expanding our inventory of services will require more than we can afford. We need your help to improve Legacy New Tab. If your willing to contribute, then click the
+                      link below and donate as much as possible.</h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <button type="button" class="btn btn-light"><a href="https://goo.gl/uqZefh">Go to PayPal!</a></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-9" id="contact-us-settings" align="center">
+                <h1>Contact Us</h1>
+                <hr>
+                <div class="row">
+                  <h4>How can we help?</h4>
+                  <div class="col-sm-12">
+                    <h5>Use the link below to contact us about any suggestions, compliments, or issues concerning Legacy New Tab. We will get back to you within 24 hours!</h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <button type="button" class="btn btn-light"><a href="https://goo.gl/forms/QqfXhRE18giNMyty2">Contact Us!</a></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-9" id="about-us-settings" align="center">
+                <h1>About Us</h1>
+                <hr>
+                <div class="row">
+                  <div><img src="/img/PixovexLogo.png" width="45%" height="45%" alt="logo"></div>
+                  <div class="col-sm-12">
+                    <h5>Legacy New Tab is the first project created by our team. We want to create a friendly user interface that enhances the user's motivation and interest, and brings information to their fingertips.</h5>
+                    <h5>More updates to Legacy New Tab coming soon...</h5>
+                    <!-- <div class="row">
+                    <div class="col-sm-12">
+                      <button type="button" class="btn btn-light"><a href="https://goo.gl/pdHdbP">Follow us on Instagram!</a></button>
+                    </div>
+                  </div> -->
+                    
+                  </div>
+                </div>
+              </div>
+              <!--settings menu ends-->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- done settings modal-->
+
+    <!--todolist Modal-->
+    <!-- <div class="modal fade" id="todo-listModal" tabindex="-1" role="dialog" aria-labelledby="todo-listModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header"> <label type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></label>
+          <h4 class="modal-title" id="settingsModalLabel" align="center">To-Do List</h4> </div>
+        <div class="modal-body">
+          <div class="panel-body">
+            <form id="todo-form" action="#"> <input type="text" name="item" id="todo-input" placeholder="Add a new reminder..." autocomplete="off" /> <br></form>
+            <h3 align="center">List</h3>
+                  <ul id="todo-list"></ul>
+                </div>
+              </div>
+              <div class="modal-footer"> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> </div>
+            </div>
+          </div>
+        </div> -->
+    <!-- done todolist modal-->
+
+    <!--notification popup-->
+    <div id="notification" class="overlay">
+      <div class="popup" align="center">
+        <h2><span id="notification-heading"></span></h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+          <span id="notification-content"></span>
+        </div>
+      </div>
+    </div>
+    <!-- end of notification popup-->
+    <footer id="footer">
+      <div class="dropup">
+        <a class="dropdown-toggle" type="button" data-toggle="dropdown"><i id="expand_less" class="material-icons big expand" title="Expand">expand_less</i></a>
+        <ul class="dropdown-menu">
+          <!-- <li class="options" align="center"><i id="todo-list-icon" class="material-icons big add" data-toggle="modal" data-target="#todo-listModal" title="To-Do List">done_all</i></li> -->
+          <li class="options" align="center"><i id="music_note" class="material-icons big music_note" title="Music">music_note</i></li>
+
+
+          <li class="options" align="center"><i id="map" class="material-icons big map" title="Map">map</i></li>
+        </ul>
+      </div>
+      <div id="main-wrapper" class="main-wrapper" align="center">
+        <div class="main-wrapper-content" style="font-size:40px;">
+          <span id="displayedName">Hello User!</span>
+          <div id="css-marquee">
+            <div class="quote-box">
+              <div class="quote-text">
+                <span id="text"></span>
+
+                <p id="text"></p>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- <p id="quote" style="font-size: 25px;">Quote</p> -->
+        </div>
+      </div>
+      <div class="settings">
+        <i id="settings" class="material-icons big settings" data-toggle="modal" data-target="#settingsModal" title="Settings">settings</i>
+      </div>
+      <!-- Hello
+        <input id="user-name" class="user-name" placeholder="Sree" style="vertical-align: middle;"></input> -->
+    </footer>
+    <script src="js/sweetalert.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/crypto-js.min.js"></script>
+</body>
+<!-- end of reminder toggle -->
+
+</html>
